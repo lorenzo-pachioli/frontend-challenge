@@ -22,10 +22,16 @@ const ProductList = () => {
 
     // Search filter
     if (search) {
-      filtered = filtered.filter(product => 
-        product.name.includes(search) ||
-        product.sku.includes(search)
-      )
+      filtered = filtered.filter(product => {
+        const normalizeCaseName = product.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        const normalizeCaseSearch = search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        const normalizeCaseSku = product.sku.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+        return (
+          normalizeCaseName.includes(normalizeCaseSearch) ||
+          normalizeCaseSku.includes(normalizeCaseSearch)
+        );
+      });
     }
 
     // Sorting logic
@@ -48,16 +54,19 @@ const ProductList = () => {
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
+    console.log("Selected category: ", category);
     filterProducts(category, searchQuery, sortBy)
   }
 
   const handleSearchChange = (search: string) => {
     setSearchQuery(search)
+    console.log("Search query: ", search);
     filterProducts(selectedCategory, search, sortBy)
   }
 
   const handleSortChange = (sort: string) => {
     setSortBy(sort)
+    console.log("Sort by: ", sort);
     filterProducts(selectedCategory, searchQuery, sort)
   }
 
