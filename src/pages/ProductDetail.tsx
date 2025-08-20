@@ -4,12 +4,14 @@ import { products } from '../data/products'
 import { Product } from '../types/Product'
 import PricingCalculator from '../components/PricingCalculator'
 import './ProductDetail.css'
+import { useShoppingCart } from '../hooks/shopingCartProvider'
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = useState<Product | null>(null)
   const [selectedColor, setSelectedColor] = useState<string>('')
   const [selectedSize, setSelectedSize] = useState<string>('')
+  const { addToCart } = useShoppingCart()
   const [quantity, setQuantity] = useState<number>(1)
 
   useEffect(() => {
@@ -191,7 +193,7 @@ const ProductDetail = () => {
                 <button 
                   className={`btn btn-primary cta1 ${!canAddToCart ? 'disabled' : ''}`}
                   disabled={!canAddToCart}
-                  onClick={() => alert('Función de agregar al carrito por implementar')}
+                  onClick={() => addToCart(product.id, quantity)}
                 >
                   <span className="material-icons">shopping_cart</span>
                   {canAddToCart ? 'Agregar al carrito' : 'No disponible'}
