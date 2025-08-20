@@ -44,6 +44,12 @@ const ProductDetail = () => {
     )
   }
 
+  const handleChangeQuantity = (newQuantity: number) => {
+    if (newQuantity > 0 && newQuantity <= product.stock) {
+      setQuantity(newQuantity)
+    }
+  }
+
   // Validate product status
   const canAddToCart = product.status === 'active' && product.stock > 0
 
@@ -160,7 +166,7 @@ const ProductDetail = () => {
                 <label className="quantity-label l1">Cantidad:</label>
                 <div className="quantity-controls">
                   <button 
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    onClick={() => handleChangeQuantity(Math.max(1, quantity - 1))}
                     className="quantity-btn"
                   >
                     <span className="material-icons">remove</span>
@@ -168,12 +174,12 @@ const ProductDetail = () => {
                   <input 
                     type="number" 
                     value={quantity} 
-                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                    onChange={(e) => handleChangeQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                     className="quantity-input"
                     min="1"
                   />
                   <button 
-                    onClick={() => setQuantity(quantity + 1)}
+                    onClick={() => handleChangeQuantity(quantity + 1)}
                     className="quantity-btn"
                   >
                     <span className="material-icons">add</span>
@@ -205,7 +211,7 @@ const ProductDetail = () => {
 
         {/* Pricing Calculator */}
         <div className="pricing-section">
-          <PricingCalculator product={product} />
+          <PricingCalculator product={product} quantity={quantity} handleChangeQuantity={handleChangeQuantity} />
         </div>
       </div>
     </div>

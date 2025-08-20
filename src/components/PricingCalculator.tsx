@@ -5,10 +5,11 @@ import './PricingCalculator.css'
 
 interface PricingCalculatorProps {
   product: Product
+  quantity: number
+  handleChangeQuantity: (newQuantity: number) => void
 }
 
-const PricingCalculator = ({ product }: PricingCalculatorProps) => {
-  const [quantity, setQuantity] = useState<number>(1)
+const PricingCalculator = ({ product, quantity, handleChangeQuantity }: PricingCalculatorProps) => {
   const [selectedBreak, setSelectedBreak] = useState<number>(0)
 
   // Calculate best pricing for quantity
@@ -61,7 +62,7 @@ const PricingCalculator = ({ product }: PricingCalculatorProps) => {
             <input
               type="number"
               value={quantity}
-              onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+              onChange={(e) => handleChangeQuantity(Math.max(1, parseInt(e.target.value) || 1))}
               className="quantity-input p1"
               min="1"
               max="10000"
@@ -85,7 +86,7 @@ const PricingCalculator = ({ product }: PricingCalculatorProps) => {
                     className={`price-break ${isActive ? 'active' : ''} ${isSelected ? 'selected' : ''}`}
                     onClick={() => {
                       setSelectedBreak(index)
-                      setQuantity(priceBreak.minQty)
+                      handleChangeQuantity(priceBreak.minQty)
                     }}
                   >
                     <div className="break-quantity l1">
