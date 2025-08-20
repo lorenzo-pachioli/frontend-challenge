@@ -168,6 +168,13 @@
   font-weight: 500;
 }
 
+.clean-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .filters-card {

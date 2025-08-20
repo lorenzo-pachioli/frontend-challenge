@@ -84,8 +84,9 @@ const ProductList = () => {
     filterProducts(selectedCategory, searchQuery, sort, selectedSupplier, priceRange);
   }
 
-  const handleSupplierChange = (supplierId: string) => {
+  const handleSupplierChange = (supplierId: string | null) => {
     if(supplierId === selectedSupplier) setSelectedSupplier(null);
+    else if(supplierId === null) setSelectedSupplier(null);
     else setSelectedSupplier(supplierId);
 
     filterProducts(selectedCategory, searchQuery, sortBy, supplierId, priceRange);

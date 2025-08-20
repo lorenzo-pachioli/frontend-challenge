@@ -10,7 +10,7 @@ interface ProductFiltersProps {
   onCategoryChange: (category: string) => void
   onSearchChange: (search: string) => void
   onSortChange: (sort: string) => void
-  onSupplierChange: (supplierId: string) => void
+  onSupplierChange: (supplierId: string | null) => void
   onPriceRangeChange: (min: number | null, max: number | null) => void
 }
 
@@ -110,7 +110,21 @@ const ProductFilters = ({
               ))}
           </div>
         </div>
-      </div>
+
+        <div className="clean-section">
+          <button 
+            className="btn btn-primary cta1"
+            onClick={() => {
+              onSearchChange('')
+              onCategoryChange('all')
+              onSupplierChange(null)
+              onPriceRangeChange(null, null)
+            }}
+          >
+            Limpiar filtros
+          </button>
+        </div>
+        </div>
     </div>
   )
 }
