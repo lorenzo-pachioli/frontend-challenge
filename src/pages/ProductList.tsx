@@ -11,9 +11,10 @@ const ProductList = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('name')
   const [selectedSupplier, setSelectedSupplier] = useState<string | null>(null)
+  const [priceRange, setPriceRange] = useState<{ min: number | null; max: number | null }>({ min: null, max: null })
 
   // Filter and sort products based on criteria
-  const filterProducts = (category: string, search: string, sort: string, selectedSupplier: string | null) => {
+  const filterProducts = (category: string, search: string, sort: string, selectedSupplier: string | null, priceRange: { min: number | null; max: number | null }) => {
     let filtered = [...allProducts]
 
     // Category filter
@@ -39,6 +40,14 @@ const ProductList = () => {
       filtered = filtered.filter(product => product.supplier === selectedSupplier);
     }
 
+    if (priceRange.min !== null || priceRange.max !== null) {
+      filtered = filtered.filter(product => {
+        const isWithinMin = priceRange.min !== null ? product.basePrice >= priceRange.min : true;
+        const isWithinMax = priceRange.max !== null ? product.basePrice <= priceRange.max : true;
+        return isWithinMin && isWithinMax;
+      });
+    }
+
     // Sorting logic
     switch (sort) {
       case 'name':
@@ -60,26 +69,37 @@ const ProductList = () => {
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
     console.log("Selected category: ", category);
-    filterProducts(category, searchQuery, sortBy, selectedSupplier)
+    filterProducts(category, searchQuery, sortBy, selectedSupplier, priceRange);
   }
 
   const handleSearchChange = (search: string) => {
     setSearchQuery(search)
     console.log("Search query: ", search);
-    filterProducts(selectedCategory, search, sortBy, selectedSupplier)
+    filterProducts(selectedCategory, search, sortBy, selectedSupplier, priceRange);
   }
 
   const handleSortChange = (sort: string) => {
     setSortBy(sort)
     console.log("Sort by: ", sort);
-    filterProducts(selectedCategory, searchQuery, sort, selectedSupplier)
+    filterProducts(selectedCategory, searchQuery, sort, selectedSupplier, priceRange);
   }
 
   const handleSupplierChange = (supplierId: string) => {
     if(supplierId === selectedSupplier) setSelectedSupplier(null);
     else setSelectedSupplier(supplierId);
 
-    filterProducts(selectedCategory, searchQuery, sortBy, supplierId);
+    filterProducts(selectedCategory, searchQuery, sortBy, supplierId, priceRange);
+  }
+
+  const handlePriceRangeChange = (min: number | null, max: number | null) => {
+    if (min === priceRange.min && max === priceRange.max) {
+      setPriceRange({ min: null, max: null });
+      filterProducts(selectedCategory, searchQuery, sortBy, selectedSupplier, { min: null, max: null });
+      return;
+    }
+
+    setPriceRange({ min, max });
+    filterProducts(selectedCategory, searchQuery, sortBy, selectedSupplier, { min, max });
   }
 
   return (
@@ -112,10 +132,12 @@ const ProductList = () => {
           searchQuery={searchQuery}
           sortBy={sortBy}
           selectedSupplier={selectedSupplier}
+          priceRange={priceRange}
           onCategoryChange={handleCategoryChange}
           onSearchChange={handleSearchChange}
           onSortChange={handleSortChange}
           onSupplierChange={handleSupplierChange}
+          onPriceRangeChange={handlePriceRangeChange}
         />
 
         {/* Products Grid */}
@@ -130,7 +152,7 @@ const ProductList = () => {
                 onClick={() => {
                   setSearchQuery('')
                   setSelectedCategory('all')
-                  filterProducts('all', '', sortBy, selectedSupplier)
+                  filterProducts('all', '', sortBy, selectedSupplier, { min: null, max: null })
                 }}
               >
                 Ver todos los productos

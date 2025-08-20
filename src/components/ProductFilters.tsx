@@ -1,4 +1,4 @@
-import { categories, suppliers } from '../data/products'
+import { categories, pricesRange, suppliers } from '../data/products'
 import './ProductFilters.css'
 
 interface ProductFiltersProps {
@@ -6,10 +6,12 @@ interface ProductFiltersProps {
   searchQuery: string
   sortBy: string
   selectedSupplier: string | null
+  priceRange: { min: number | null; max: number | null }
   onCategoryChange: (category: string) => void
   onSearchChange: (search: string) => void
   onSortChange: (sort: string) => void
   onSupplierChange: (supplierId: string) => void
+  onPriceRangeChange: (min: number | null, max: number | null) => void
 }
 
 const ProductFilters = ({
@@ -17,10 +19,12 @@ const ProductFilters = ({
   searchQuery,
   sortBy,
   selectedSupplier,
+  priceRange,
   onCategoryChange,
   onSearchChange,
   onSortChange,
-  onSupplierChange
+  onSupplierChange,
+  onPriceRangeChange
 }: ProductFiltersProps) => {
   return (
     <div className="product-filters">
@@ -79,16 +83,31 @@ const ProductFilters = ({
           </select>
         </div>
 
+
+        {/* Price Range */}
+        <div className="filter-section">
+          <h3 className="filter-title p1-medium">Rango de precios</h3>
+          <div className="supplier-list">
+            {pricesRange.map(price => (
+              <div key={price.min} className={`supplier-item ${priceRange.min === price.min && priceRange.max === price.max ? 'active' : ''}`} onClick={() => onPriceRangeChange(price.min, price.max)}>
+                <span className="supplier-name l1">{price.min} - {price.max}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+          
+        
+
         {/* Quick Stats - Bug: hardcoded values instead of dynamic */}
         <div className="filter-section">
           <h3 className="filter-title p1-medium">Proveedores</h3>
           <div className="supplier-list">
-            {suppliers.map(supplier => (
-              <div key={supplier.id} className={`supplier-item ${selectedSupplier === supplier.id ? 'active' : ''}`} onClick={() => onSupplierChange(supplier.id)}>
-                <span className="supplier-name l1">{supplier.name}</span>
-                <span className="supplier-count l1">{supplier.products}</span>
-              </div>
-            ))}
+              {suppliers.map(supplier => (
+                <div key={supplier.id} className={`supplier-item ${selectedSupplier === supplier.id ? 'active' : ''}`} onClick={() => onSupplierChange(supplier.id)}>
+                  <span className="supplier-name l1">{supplier.name}</span>
+                  <span className="supplier-count l1">{supplier.products}</span>
+                </div>
+              ))}
           </div>
         </div>
       </div>

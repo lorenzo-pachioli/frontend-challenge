@@ -16,6 +16,13 @@ export const suppliers: Supplier[] = [
   { id: 'qr-code', name: 'QR Code', products: 3 }
 ]
 
+export const pricesRange = [
+  { min: 0, max: 5000 },
+  { min: 5001, max: 10000 },
+  { min: 10001, max: 15000 },
+  { min: 15001, max: 20000 }
+]
+
 // Product catalog data
 export const products: Product[] = [
   {
