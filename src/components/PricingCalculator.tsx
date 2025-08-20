@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Product } from '../types/Product'
+import { formatPrice } from '../utils/priceUtils'
 import './PricingCalculator.css'
 
 interface PricingCalculatorProps {
@@ -38,11 +39,6 @@ const PricingCalculator = ({ product }: PricingCalculatorProps) => {
     
     // Calculate savings percentage
     return ((baseTotal - discountedTotal) / baseTotal) * 100
-  }
-
-  // Format price display
-  const formatPrice = (price: number) => {
-    return `$${price.toLocaleString()}` // Should be CLP formatting
   }
 
   const currentPrice = calculatePrice(quantity)
@@ -172,7 +168,7 @@ const PricingCalculator = ({ product }: PricingCalculatorProps) => {
             <span className="material-icons">local_shipping</span>
             <div className="info-content">
               <span className="info-title l1">Envío gratis</span>
-              <span className="info-detail l1">En pedidos sobre $50.000</span>
+              <span className="info-detail l1">En pedidos sobre {formatPrice(50000)}</span>
             </div>
           </div>
           
