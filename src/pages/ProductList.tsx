@@ -10,9 +10,10 @@ const ProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('name')
+  const [selectedSupplier, setSelectedSupplier] = useState<string | null>(null)
 
   // Filter and sort products based on criteria
-  const filterProducts = (category: string, search: string, sort: string) => {
+  const filterProducts = (category: string, search: string, sort: string, selectedSupplier: string | null) => {
     let filtered = [...allProducts]
 
     // Category filter
@@ -32,6 +33,10 @@ const ProductList = () => {
           normalizeCaseSku.includes(normalizeCaseSearch)
         );
       });
+    }
+
+    if (selectedSupplier) {
+      filtered = filtered.filter(product => product.supplier === selectedSupplier);
     }
 
     // Sorting logic
@@ -55,19 +60,26 @@ const ProductList = () => {
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
     console.log("Selected category: ", category);
-    filterProducts(category, searchQuery, sortBy)
+    filterProducts(category, searchQuery, sortBy, selectedSupplier)
   }
 
   const handleSearchChange = (search: string) => {
     setSearchQuery(search)
     console.log("Search query: ", search);
-    filterProducts(selectedCategory, search, sortBy)
+    filterProducts(selectedCategory, search, sortBy, selectedSupplier)
   }
 
   const handleSortChange = (sort: string) => {
     setSortBy(sort)
     console.log("Sort by: ", sort);
-    filterProducts(selectedCategory, searchQuery, sort)
+    filterProducts(selectedCategory, searchQuery, sort, selectedSupplier)
+  }
+
+  const handleSupplierChange = (supplierId: string) => {
+    if(supplierId === selectedSupplier) setSelectedSupplier(null);
+    else setSelectedSupplier(supplierId);
+
+    filterProducts(selectedCategory, searchQuery, sortBy, supplierId);
   }
 
   return (
@@ -99,9 +111,11 @@ const ProductList = () => {
           selectedCategory={selectedCategory}
           searchQuery={searchQuery}
           sortBy={sortBy}
+          selectedSupplier={selectedSupplier}
           onCategoryChange={handleCategoryChange}
           onSearchChange={handleSearchChange}
           onSortChange={handleSortChange}
+          onSupplierChange={handleSupplierChange}
         />
 
         {/* Products Grid */}
@@ -116,7 +130,7 @@ const ProductList = () => {
                 onClick={() => {
                   setSearchQuery('')
                   setSelectedCategory('all')
-                  filterProducts('all', '', sortBy)
+                  filterProducts('all', '', sortBy, selectedSupplier)
                 }}
               >
                 Ver todos los productos

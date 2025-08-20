@@ -5,18 +5,22 @@ interface ProductFiltersProps {
   selectedCategory: string
   searchQuery: string
   sortBy: string
+  selectedSupplier: string | null
   onCategoryChange: (category: string) => void
   onSearchChange: (search: string) => void
   onSortChange: (sort: string) => void
+  onSupplierChange: (supplierId: string) => void
 }
 
 const ProductFilters = ({
   selectedCategory,
   searchQuery,
   sortBy,
+  selectedSupplier,
   onCategoryChange,
   onSearchChange,
-  onSortChange
+  onSortChange,
+  onSupplierChange
 }: ProductFiltersProps) => {
   return (
     <div className="product-filters">
@@ -80,7 +84,7 @@ const ProductFilters = ({
           <h3 className="filter-title p1-medium">Proveedores</h3>
           <div className="supplier-list">
             {suppliers.map(supplier => (
-              <div key={supplier.id} className="supplier-item">
+              <div key={supplier.id} className={`supplier-item ${selectedSupplier === supplier.id ? 'active' : ''}`} onClick={() => onSupplierChange(supplier.id)}>
                 <span className="supplier-name l1">{supplier.name}</span>
                 <span className="supplier-count l1">{supplier.products}</span>
               </div>
