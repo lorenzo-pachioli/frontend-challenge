@@ -80,9 +80,9 @@ const PricingCalculator = ({ product }: PricingCalculatorProps) => {
             <h4 className="breaks-title p1-medium">Descuentos por volumen</h4>
             <div className="price-breaks">
               {product.priceBreaks.map((priceBreak, index) => {
-                const isActive = quantity >= priceBreak.minQty
+                const isActive = quantity >= priceBreak.minQty && priceBreak.price <= (currentPrice / quantity)
                 const isSelected = selectedBreak === index
-                
+
                 return (
                   <div 
                     key={index}
