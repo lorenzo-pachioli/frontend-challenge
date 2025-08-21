@@ -8,7 +8,7 @@ export interface Product {
   basePrice: number
   stock: number
   description?: string
-  image?: string
+  image?: string[]
   colors?: string[]
   sizes?: string[]
   features?: string[]
