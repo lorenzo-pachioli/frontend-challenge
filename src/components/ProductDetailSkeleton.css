@@ -1,0 +1,278 @@
+
+/* Skeleton Animation Styles */
+.color-preview-skeleton {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border: 2px solid white;
+  box-shadow: 0 0 0 1px #e2e8f0;
+}
+
+/* Breadcrumb Skeleton */
+.breadcrumb-current-skeleton {
+  height: 16px;
+  width: 120px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Main Image Skeleton */
+.image-placeholder-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.image-placeholder-skeleton .material-icons {
+  color: #cbd5e1;
+  opacity: 0.5;
+}
+
+/* Thumbnail Skeletons */
+.thumbnail-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+.thumbnail-skeleton:nth-child(1) { animation-delay: 0.1s; }
+.thumbnail-skeleton:nth-child(2) { animation-delay: 0.2s; }
+.thumbnail-skeleton:nth-child(3) { animation-delay: 0.3s; }
+
+.thumbnail-skeleton .material-icons {
+  color: #cbd5e1;
+  opacity: 0.5;
+}
+
+/* Product Header Skeleton */
+.product-title-skeleton {
+  height: 32px;
+  width: 70%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.product-sku-skeleton {
+  height: 18px;
+  width: 40%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+/* Description Skeleton */
+.product-description-title-skeleton {
+  height: 20px;
+  width: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.product-description-text-skeleton {
+  height: 16px;
+  width: 90%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+/* Features Skeleton */
+.product-features-title-skeleton {
+  height: 20px;
+  width: 40%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.4s;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.feature-item-skeleton {
+  height: 16px;
+  width: 80%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.feature-item-skeleton:nth-child(1) { animation-delay: 0.5s; }
+.feature-item-skeleton:nth-child(2) { animation-delay: 0.6s; }
+.feature-item-skeleton:nth-child(3) { animation-delay: 0.7s; }
+
+.feature-item-skeleton .material-icons {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 50%;
+  margin-right: 8px;
+  color: transparent;
+}
+
+/* Selection Groups Skeleton */
+.selection-title-skeleton {
+  height: 18px;
+  width: 30%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* Color Options Skeleton */
+.color-option-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.color-option-skeleton:nth-child(1) { animation-delay: 0.2s; }
+.color-option-skeleton:nth-child(2) { animation-delay: 0.3s; }
+.color-option-skeleton:nth-child(3) { animation-delay: 0.4s; }
+
+.color-option-skeleton span {
+  height: 12px;
+  width: 40px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Size Options Skeleton */
+.size-option-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.size-option-skeleton:nth-child(1) { animation-delay: 0.1s; }
+.size-option-skeleton:nth-child(2) { animation-delay: 0.2s; }
+.size-option-skeleton:nth-child(3) { animation-delay: 0.3s; }
+.size-option-skeleton:nth-child(4) { animation-delay: 0.4s; }
+.size-option-skeleton:nth-child(5) { animation-delay: 0.5s; }
+.size-option-skeleton:nth-child(6) { animation-delay: 0.6s; }
+
+.size-option-skeleton span {
+  height: 14px;
+  width: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: block;
+}
+
+/* Quantity Selector Skeleton */
+.quantity-label-skeleton {
+  height: 16px;
+  width: 60px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+  border-radius: 4px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.quantity-btn-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.quantity-btn-skeleton:first-child { animation-delay: 0.1s; }
+.quantity-btn-skeleton:last-child { animation-delay: 0.3s; }
+
+.quantity-btn-skeleton .material-icons {
+  color: #cbd5e1;
+  opacity: 0.5;
+}
+
+.quantity-input-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Action Buttons Skeleton */
+.btn-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-skeleton:first-child { animation-delay: 0.1s; }
+.btn-skeleton:last-child { animation-delay: 0.2s; }
+
+.btn-skeleton .material-icons {
+  color: #cbd5e1;
+  opacity: 0.5;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Pulse Animation Alternative */
+.skeleton-pulse {
+    animation: skeleton-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-pulse {
+    0% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
