@@ -30,7 +30,7 @@ const Header = () => {
 
           {/* Actions */}
           <div className="header-actions">
-            <button className="btn btn-secondary cta1">
+            <button className="btn btn-secondary cta1"  onClick={() => alert('Función de iniciar sesion por implementar')}>
               <span className="material-icons">person</span>
               Iniciar Sesión
             </button>
