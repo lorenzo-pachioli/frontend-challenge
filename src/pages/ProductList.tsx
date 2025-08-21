@@ -1,17 +1,28 @@
-import { useState } from 'react'
-import ProductCard from '../components/ProductCard'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import ProductFilters from '../components/ProductFilters'
 import { products as allProducts } from '../data/products'
 import { Product } from '../types/Product'
 import './ProductList.css'
+import ProductListSkeleton from '../components/ProductListSkeleton'
+
+const ProductListComponent = lazy(() => import('../components/ProductListComponent'))
 
 const ProductList = () => {
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts)
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('name')
   const [selectedSupplier, setSelectedSupplier] = useState<string | null>(null)
   const [priceRange, setPriceRange] = useState<{ min: number | null; max: number | null }>({ min: null, max: null })
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate an API call to show loading skeleton
+    setTimeout(() => {
+      setFilteredProducts(allProducts);
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   // Filter and sort products based on criteria
   const filterProducts = (category: string, search: string, sort: string, selectedSupplier: string | null, priceRange: { min: number | null; max: number | null }) => {
@@ -140,33 +151,19 @@ const ProductList = () => {
           onSupplierChange={handleSupplierChange}
           onPriceRangeChange={handlePriceRangeChange}
         />
-
+        
         {/* Products Grid */}
-        <div className="products-section">
-          {filteredProducts.length === 0 ? (
-            <div className="empty-state">
-              <span className="material-icons">search_off</span>
-              <h3 className="h2">No hay productos</h3>
-              <p className="p1">No se encontraron productos que coincidan con tu búsqueda.</p>
-              <button 
-                className="btn btn-primary cta1"
-                onClick={() => {
-                  setSearchQuery('')
-                  setSelectedCategory('all')
-                  filterProducts('all', '', sortBy, selectedSupplier, { min: null, max: null })
-                }}
-              >
-                Ver todos los productos
-              </button>
-            </div>
-          ) : (
-            <div className="products-grid">
-              {filteredProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
-        </div>
+        <Suspense fallback={<ProductListSkeleton />}>
+          <ProductListComponent
+            filteredProducts={filteredProducts}
+            setSearchQuery={setSearchQuery}
+            setSelectedCategory={setSelectedCategory}
+            filterProducts={filterProducts}
+            sortBy={sortBy}
+            selectedSupplier={selectedSupplier}
+            loading={loading}
+          />
+        </Suspense>
       </div>
     </div>
   )

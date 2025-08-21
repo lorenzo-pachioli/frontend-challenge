@@ -85,6 +85,18 @@
   margin-bottom: 24px;
 }
 
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spinner-icon {
+    animation-name: spin;
+    animation-duration: 1.5s; /* Adjust as needed */
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .page-header {
