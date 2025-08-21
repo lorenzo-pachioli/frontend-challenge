@@ -74,6 +74,22 @@
   margin-bottom: 16px;
 }
 
+/* Collapsible Filters Container */
+.filters-content {
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 1s ease-in-out;
+}
+
+.filters-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.filters-content.expanded {
+  max-height: 2000px; /* Valor alto para permitir contenido variable */
+  opacity: 1;
+}
+
 /* Category Filters */
 .category-filters {
   display: flex;
@@ -171,8 +187,20 @@
 .clean-section {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px;
+  justify-content: space-between;
+  padding: 8px 0px;
+}
+
+.clean-section .btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.clean-section .btn .material-icons {
+  transition: transform 0.3s ease-in-out;
+}
+
+.clean-section .btn.expanded .material-icons {
+  transform: rotate(180deg);
 }
 
 /* Responsive */
