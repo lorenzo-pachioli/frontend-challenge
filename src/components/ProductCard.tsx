@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Product } from '../types/Product'
 import { formatPrice } from '../utils/priceUtils'
 import './ProductCard.css'
+import CotizacionButton from './CotizacionButton'
 
 interface ProductCardProps {
   product: Product
@@ -112,18 +113,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
 
-        <div className="card-actions">
-          <button 
-            className="btn btn-secondary l1"
-            onClick={(e) => {
-              e.preventDefault()
-              alert('Función de cotización por implementar')
-            }}
-          >
-            <span className="material-icons">calculate</span>
-            Cotizar
-          </button>
-        </div>
+        <CotizacionButton label="Solicitar cotización oficial" componentOption={1} />
       </div>
     </div>
   )

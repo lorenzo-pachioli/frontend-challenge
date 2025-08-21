@@ -1,37 +1,41 @@
 
 import { createContext, useContext, useCallback, useState, ReactNode } from 'react';
+import { CartItem, Product } from '../types/Product';
 
-interface ICartItem {
-  id: number;
-  quantity: number;
-}
 
 interface ShoppingCartContextType {
-  cartItems: ICartItem[];
-  addToCart: (productId: number, quantity: number) => void;
+  cartItems: CartItem[];
+  addToCart: (product: Product, quantity: number, selectedColor: string, selectedSize: string, unitPrice: number) => void;
   quantityOfItems: () => number;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
 
-export function ShoppingCartProvider({ children, initValue }: { children: ReactNode, initValue: ICartItem[] }) {
-    
-    const [cartItems, setCartItems] = useState<ICartItem[]>(initValue);
+export function ShoppingCartProvider({ children, initValue }: { children: ReactNode, initValue: CartItem[] }) {
 
-    const addToCart = useCallback((productId: number, quantity: number) => {
+    const [cartItems, setCartItems] = useState<CartItem[]>(initValue);
 
-        let newList: ICartItem[] = [];
+    const addToCart = useCallback((product: Product, quantity: number, selectedColor: string, selectedSize: string, unitPrice: number ) => {
+
+        let newList: CartItem[] = [];
         if (quantity <= 0) return;
 
-        if(cartItems.some(item => item.id === productId)) {
+        if(cartItems.some(item => item.id === product.id && item.selectedColor === selectedColor && item.selectedSize === selectedSize )) {
             newList = cartItems.map(item => {
-                if (item.id === productId) {
-                    return { ...item, quantity: item.quantity + quantity };
+                if (item.id === product.id) {
+                    return { ...item, quantity: item.quantity + quantity, unitPrice, totalPrice: unitPrice * (item.quantity + quantity) };
                 }
                 return item;
             });
         } else {
-            const newItem = { id: productId, quantity };
+            const newItem = { 
+              ...product,
+              quantity,
+              selectedColor,
+              selectedSize,
+              unitPrice,
+              totalPrice: unitPrice * quantity
+            };
             newList = [...cartItems, newItem];
         }
 

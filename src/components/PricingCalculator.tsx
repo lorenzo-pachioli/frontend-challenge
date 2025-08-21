@@ -2,14 +2,16 @@ import { useState } from 'react'
 import { Product } from '../types/Product'
 import { formatPrice } from '../utils/priceUtils'
 import './PricingCalculator.css'
+import CotizacionButton from './CotizacionButton'
 
 interface PricingCalculatorProps {
   product: Product
   quantity: number
   handleChangeQuantity: (newQuantity: number) => void
+  addToCart: (price: number) => void
 }
 
-const PricingCalculator = ({ product, quantity, handleChangeQuantity }: PricingCalculatorProps) => {
+const PricingCalculator = ({ product, quantity, handleChangeQuantity, addToCart }: PricingCalculatorProps) => {
   const [selectedBreak, setSelectedBreak] = useState<number>(0)
 
   // Calculate best pricing for quantity
@@ -140,23 +142,12 @@ const PricingCalculator = ({ product, quantity, handleChangeQuantity }: PricingC
 
         {/* Actions */}
         <div className="calculator-actions">
-          <button 
-            className="btn btn-secondary cta1"
-            onClick={() => {
-              // Handle quote request
-              alert(`Cotización solicitada para ${quantity} unidades de ${product.name}`)
-            }}
-          >
-            <span className="material-icons">email</span>
-            Solicitar cotización oficial
-          </button>
-          
+
+          <CotizacionButton label="Solicitar cotización oficial" componentOption={2} />
+
           <button 
             className="btn btn-primary cta1"
-            onClick={() => {
-              // Add to cart functionality
-              alert('Función de agregar al carrito por implementar')
-            }}
+            onClick={() => addToCart(product.basePrice)}
           >
             <span className="material-icons">shopping_cart</span>
             Agregar al carrito

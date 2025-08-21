@@ -4,6 +4,7 @@ import ProductList from './pages/ProductList'
 import ProductDetail from './pages/ProductDetail'
 import './App.css'
 import { ShoppingCartProvider } from './hooks/shopingCartProvider'
+import Cotizacion from './pages/Cotizacion'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route path="/" element={<ProductList />} />
               <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/cotizacion" element={<Cotizacion />} />
             </Routes>
         </main>
       </ShoppingCartProvider>

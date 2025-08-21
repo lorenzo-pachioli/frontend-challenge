@@ -46,9 +46,30 @@ const ProductDetail = () => {
     )
   }
 
+  const productFinalPrice = (product:Product, prodQuantity:number) => {
+    if (!product.priceBreaks) {
+        return product.basePrice;
+    }
+    let discount = { minQty: 0, price: product.basePrice };
+    product.priceBreaks.map((dis) => {
+      if(dis.minQty <= prodQuantity){
+        discount = dis;
+      }
+    } );
+    const finalPrice = discount.minQty > 0 ? discount.price : product.basePrice;
+    return finalPrice;
+  }
+
   const handleChangeQuantity = (newQuantity: number) => {
     if (newQuantity > 0 && newQuantity <= product.stock) {
       setQuantity(newQuantity)
+    }
+  }
+
+  const handleAddToCart = (finalPrice: number) => {
+    if (canAddToCart) {
+      console.log(`Adding ${quantity} of ${product.name} to cart at price ${finalPrice}`);
+      addToCart(product, quantity, selectedColor, selectedSize, productFinalPrice(product, quantity))
     }
   }
 
@@ -193,7 +214,7 @@ const ProductDetail = () => {
                 <button 
                   className={`btn btn-primary cta1 ${!canAddToCart ? 'disabled' : ''}`}
                   disabled={!canAddToCart}
-                  onClick={() => addToCart(product.id, quantity)}
+                  onClick={() => addToCart(product, quantity, selectedColor, selectedSize, productFinalPrice(product, quantity))}
                 >
                   <span className="material-icons">shopping_cart</span>
                   {canAddToCart ? 'Agregar al carrito' : 'No disponible'}
@@ -201,10 +222,11 @@ const ProductDetail = () => {
                 
                 <button 
                   className="btn btn-secondary cta1"
-                  onClick={() => alert('Función de cotización por implementar')}
                 >
                   <span className="material-icons">calculate</span>
-                  Solicitar cotización
+                  <Link 
+                  to={"/cotizacion"}
+                  >Solicitar cotización</Link>
                 </button>
               </div>
             </div>
@@ -213,7 +235,7 @@ const ProductDetail = () => {
 
         {/* Pricing Calculator */}
         <div className="pricing-section">
-          <PricingCalculator product={product} quantity={quantity} handleChangeQuantity={handleChangeQuantity} />
+          <PricingCalculator product={product} quantity={quantity} handleChangeQuantity={handleChangeQuantity} addToCart={handleAddToCart} />
         </div>
       </div>
     </div>
