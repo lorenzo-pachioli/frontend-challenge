@@ -23,6 +23,48 @@ export const pricesRange = [
   { min: 15001, max: 20000 }
 ]
 
+// Lista de todos los colores disponibles en el catálogo
+export const availableColors = [
+  'Negro',
+  'Blanco', 
+  'Azul',
+  'Rojo',
+  'Verde',
+  'Gris',
+  'Marrón',
+  'Plata',
+  'Azul Marino',
+  'Azul Navy',
+  'Gris Carbón',
+  'Negro RGB',
+  'Negro Mate',
+  'Gris Melange',
+  'Natural',
+  'Oscuro',
+  'Gris Espacial'
+]
+
+// Equivalentes CSS para cada color (mismo orden)
+export const colorsCssValues = [
+  '#000000',    // Negro
+  '#FFFFFF',    // Blanco
+  '#007BFF',    // Azul
+  '#DC3545',    // Rojo
+  '#28A745',    // Verde
+  '#6C757D',    // Gris
+  '#8B4513',    // Marrón
+  '#C0C0C0',    // Plata
+  '#000080',    // Azul Marino
+  '#000080',    // Azul Navy
+  '#36454F',    // Gris Carbón
+  '#1A1A1A',    // Negro RGB
+  '#2F2F2F',    // Negro Mate
+  '#B0BEC5',    // Gris Melange
+  '#D2B48C',    // Natural
+  '#2F4F4F',    // Oscuro
+  '#4F5B62'     // Gris Espacial
+]
+
 // Product catalog data
 export const products: Product[] = [
   {
@@ -36,6 +78,7 @@ export const products: Product[] = [
     stock: 250,
     description: 'Audífonos inalámbricos con tecnología Bluetooth 5.0, batería de larga duración y calidad premium.',
     colors: ['Negro', 'Blanco'],
+    image:['https://http2.mlstatic.com/D_NQ_NP_723557-MLU73109521747_112023-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_862142-MLU73027843316_112023-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_792439-MLU73027843320_112023-O.webp'],
     features: ['Bluetooth 5.0', 'Batería 20h', 'Cancelación ruido'],
     priceBreaks: [
       { minQty: 1, price: 8500 },

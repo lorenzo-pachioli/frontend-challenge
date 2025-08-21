@@ -3,6 +3,7 @@ import { Product } from '../types/Product'
 import { formatPrice } from '../utils/priceUtils'
 import './ProductCard.css'
 import CotizacionButton from './CotizacionButton'
+import { colorToEnglish } from '../utils/colorsUtils'
 
 interface ProductCardProps {
   product: Product
@@ -48,9 +49,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <Link to={`/product/${product.id}`} className="product-link">
         {/* Product Image */}
         <div className="product-image">
-          {/* Bug: no real image handling */}
-          <div className="image-placeholder">
-            <span className="material-icons">image</span>
+          <div className="main-image">
+            {product.image ? (
+              <img src={product.image[0]} alt={product.name} />
+            ) : (
+              <div className="image-placeholder">
+                <span className="material-icons">image</span>
+              </div>
+            )
+            }
           </div>
           
           {/* Status Badge */}
@@ -90,7 +97,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               <span className="colors-label l1">{product.colors.length} colores:</span>
               <div className="colors-preview">
                 {product.colors.slice(0, 3).map((color, index) => (
-                  <div key={index} className="color-dot" title={color}></div>
+                  <div key={index} className="color-dot"  style={{ background: colorToEnglish(color) }} title={color}></div>
                 ))}
                 {product.colors.length > 3 && (
                   <span className="more-colors l1">+{product.colors.length - 3}</span>
