@@ -5,6 +5,9 @@ import { Product } from '../types/Product'
 import PricingCalculator from '../components/PricingCalculator'
 import './ProductDetail.css'
 import { useShoppingCart } from '../hooks/shopingCartProvider'
+import ProductDetailSkeleton from '../components/ProductDetailSkeleton'
+import { colorToEnglish } from '../utils/colorsUtils'
+import CotizacionButton from '../components/CotizacionButton'
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>()
@@ -13,25 +16,40 @@ const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState<string>('')
   const { addToCart } = useShoppingCart()
   const [quantity, setQuantity] = useState<number>(1)
+  const [selectedImage, setSelectedImage] = useState<number>(1)
+  const [loading, setLoading] = useState<boolean>(true)
+
+
 
   useEffect(() => {
-    if (id) {
-      const foundProduct = products.find(p => p.id === parseInt(id))
-      setProduct(foundProduct || null)
-      
-      // Set default selections
-      if (foundProduct?.colors && foundProduct.colors.length > 0) {
-        setSelectedColor(foundProduct.colors[0])
-      }
-      if (foundProduct?.sizes && foundProduct.sizes.length > 0) {
-        setSelectedSize(foundProduct.sizes[0])
-      }
-    }
+    setTimeout(() => {
+      simulateproductFetch();
+      setLoading(false);
+    }, 1000)
   }, [id])
+
+  const simulateproductFetch = () => {
+      if (id) {
+        const foundProduct = products.find(p => p.id === parseInt(id))
+        setProduct(foundProduct || null)
+        
+        // Set default selections
+        if (foundProduct?.colors && foundProduct.colors.length > 0) {
+          setSelectedColor(foundProduct.colors[0])
+        }
+        if (foundProduct?.sizes && foundProduct.sizes.length > 0) {
+          setSelectedSize(foundProduct.sizes[0])
+        }
+      }
+  }
 
   // Handle loading state
   if (!product) {
-    return (
+    if (loading) {
+      return <ProductDetailSkeleton />;
+    }
+
+     return (
       <div className="container">
         <div className="product-not-found">
           <span className="material-icons">error_outline</span>
@@ -43,7 +61,7 @@ const ProductDetail = () => {
           </Link>
         </div>
       </div>
-    )
+    ) 
   }
 
   const productFinalPrice = (product:Product, prodQuantity:number) => {
@@ -90,16 +108,20 @@ const ProductDetail = () => {
           {/* Product Images */}
           <div className="product-images">
             <div className="main-image">
-              <div className="image-placeholder">
-                <span className="material-icons">image</span>
-              </div>
+              {selectedImage && product.image ? (
+                <img src={product.image[selectedImage - 1]} alt={product.name} />
+              ) : (
+                <div className="image-placeholder">
+                  <span className="material-icons">image</span>
+                </div>
+              )
+              }
             </div>
             
-            {/* Bug: thumbnails don't work */}
             <div className="image-thumbnails">
               {[1, 2, 3].map(i => (
-                <div key={i} className="thumbnail">
-                  <span className="material-icons">image</span>
+                <div key={i} className="thumbnail" onClick={() => setSelectedImage(i )}>
+                  {selectedImage && product.image ? <img src={product.image[i - 1]} alt={product.name} /> : <span className="material-icons">image</span>}
                 </div>
               ))}
             </div>
@@ -157,7 +179,7 @@ const ProductDetail = () => {
                       className={`color-option ${selectedColor === color ? 'selected' : ''}`}
                       onClick={() => setSelectedColor(color)}
                     >
-                      <div className="color-preview"></div>
+                      <div className="color-preview" style={{ background: colorToEnglish(color) }}></div>
                       <span className="l1">{color}</span>
                     </button>
                   ))}
@@ -219,15 +241,8 @@ const ProductDetail = () => {
                   <span className="material-icons">shopping_cart</span>
                   {canAddToCart ? 'Agregar al carrito' : 'No disponible'}
                 </button>
-                
-                <button 
-                  className="btn btn-secondary cta1"
-                >
-                  <span className="material-icons">calculate</span>
-                  <Link 
-                  to={"/cotizacion"}
-                  >Solicitar cotización</Link>
-                </button>
+                                
+                <CotizacionButton label='Solicitar cotización' componentOption={2} />
               </div>
             </div>
           </div>
