@@ -143,7 +143,7 @@ const PricingCalculator = ({ product, quantity, handleChangeQuantity, addToCart 
         {/* Actions */}
         <div className="calculator-actions">
 
-          <CotizacionButton label="Solicitar cotización oficial" componentOption={2} />
+          <CotizacionButton label="Solicitar cotización oficial" componentOption={3} />
 
           <button 
             className="btn btn-primary cta1"
