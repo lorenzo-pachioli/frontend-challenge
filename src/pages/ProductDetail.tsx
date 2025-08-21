@@ -20,14 +20,14 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState<boolean>(true)
 
 
-
+/* Simulate API call of 1sec */
   useEffect(() => {
     setTimeout(() => {
       simulateproductFetch();
       setLoading(false);
     }, 1000)
   }, [id])
-
+  
   const simulateproductFetch = () => {
       if (id) {
         const foundProduct = products.find(p => p.id === parseInt(id))
